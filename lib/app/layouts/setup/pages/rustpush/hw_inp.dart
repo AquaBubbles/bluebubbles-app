@@ -82,7 +82,7 @@ class HwInpState extends OptimizedState<HwInp> {
         var cpy = response.toList();
         cpy.removeRange(0, 5);
         
-        var parsed = await api.configFromEncoded(encoded: cpy);
+        var parsed = "";
         stagingNonInp = true;
         select(parsed, shared == 0);
       } else { throw Exception("Bad data!"); }
@@ -97,7 +97,7 @@ class HwInpState extends OptimizedState<HwInp> {
     }
   }
 
-  void select(api.RelayConfig parsed, bool mine) async {
+  void select(String parsed, bool mine) async {
     setState(() {
       if (staging == "") {
         FocusManager.instance.primaryFocus?.unfocus();
