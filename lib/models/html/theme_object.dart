@@ -35,15 +35,15 @@ class ThemeObject {
       name == "Music Theme (Dark)";
 
   List<ThemeEntry> toEntries() => [
-        ThemeEntry.fromStyle(ThemeColors.Headline1, data!.textTheme.headline1!),
-        ThemeEntry.fromStyle(ThemeColors.Headline2, data!.textTheme.headline2!),
-        ThemeEntry.fromStyle(ThemeColors.Bodytext1, data!.textTheme.bodyText1!),
-        ThemeEntry.fromStyle(ThemeColors.Bodytext2, data!.textTheme.bodyText2!),
-        ThemeEntry.fromStyle(ThemeColors.Subtitle1, data!.textTheme.subtitle1!),
-        ThemeEntry.fromStyle(ThemeColors.Subtitle2, data!.textTheme.subtitle2!),
+        ThemeEntry.fromStyle(ThemeColors.DisplayLarge, data!.textTheme.displayLarge!),
+        ThemeEntry.fromStyle(ThemeColors.DisplayMedium, data!.textTheme.displayMedium!),
+        ThemeEntry.fromStyle(ThemeColors.BodyLarge, data!.textTheme.bodyLarge!),
+        ThemeEntry.fromStyle(ThemeColors.BodyMedium, data!.textTheme.bodyMedium!),
+        ThemeEntry.fromStyle(ThemeColors.TitleMedium, data!.textTheme.titleMedium!),
+        ThemeEntry.fromStyle(ThemeColors.TitleSmall, data!.textTheme.titleSmall!),
         ThemeEntry(name: ThemeColors.AccentColor, color: data!.colorScheme.secondary, isFont: false),
         ThemeEntry(name: ThemeColors.DividerColor, color: data!.dividerColor, isFont: false),
-        ThemeEntry(name: ThemeColors.BackgroundColor, color: data!.backgroundColor, isFont: false),
+        ThemeEntry(name: ThemeColors.BackgroundColor, color: data!.colorScheme.background, isFont: false),
         ThemeEntry(name: ThemeColors.PrimaryColor, color: data!.primaryColor, isFont: false),
       ];
 
@@ -71,18 +71,18 @@ class ThemeObject {
     assert(entries.length == ThemeColors.Colors.length);
     Map<String, ThemeEntry> data = {};
     for (ThemeEntry entry in entries) {
-      if (entry.name == ThemeColors.Headline1) {
-        data[ThemeColors.Headline1] = entry;
-      } else if (entry.name == ThemeColors.Headline2) {
-        data[ThemeColors.Headline2] = entry;
-      } else if (entry.name == ThemeColors.Bodytext1) {
-        data[ThemeColors.Bodytext1] = entry;
-      } else if (entry.name == ThemeColors.Bodytext2) {
-        data[ThemeColors.Bodytext2] = entry;
-      } else if (entry.name == ThemeColors.Subtitle1) {
-        data[ThemeColors.Subtitle1] = entry;
-      } else if (entry.name == ThemeColors.Subtitle2) {
-        data[ThemeColors.Subtitle2] = entry;
+      if (entry.name == ThemeColors.DisplayLarge) {
+        data[ThemeColors.DisplayLarge] = entry;
+      } else if (entry.name == ThemeColors.DisplayMedium) {
+        data[ThemeColors.DisplayMedium] = entry;
+      } else if (entry.name == ThemeColors.BodyLarge) {
+        data[ThemeColors.BodyLarge] = entry;
+      } else if (entry.name == ThemeColors.BodyMedium) {
+        data[ThemeColors.BodyMedium] = entry;
+      } else if (entry.name == ThemeColors.TitleMedium) {
+        data[ThemeColors.TitleMedium] = entry;
+      } else if (entry.name == ThemeColors.TitleSmall) {
+        data[ThemeColors.TitleSmall] = entry;
       } else if (entry.name == ThemeColors.AccentColor) {
         data[ThemeColors.AccentColor] = entry;
       } else if (entry.name == ThemeColors.DividerColor) {
@@ -96,19 +96,18 @@ class ThemeObject {
 
     return ThemeData(
         textTheme: TextTheme(
-          headline1: data[ThemeColors.Headline1]!.style,
-          headline2: data[ThemeColors.Headline2]!.style,
-          bodyText1: data[ThemeColors.Bodytext1]!.style,
-          bodyText2: data[ThemeColors.Bodytext2]!.style,
-          subtitle1: data[ThemeColors.Subtitle1]!.style,
-          subtitle2: data[ThemeColors.Subtitle2]!.style,
+          displayLarge: data[ThemeColors.DisplayLarge]!.style,
+          displayMedium: data[ThemeColors.DisplayMedium]!.style,
+          bodyLarge: data[ThemeColors.BodyLarge]!.style,
+          bodyMedium: data[ThemeColors.BodyMedium]!.style,
+          titleMedium: data[ThemeColors.TitleMedium]!.style,
+          titleSmall: data[ThemeColors.TitleSmall]!.style,
         ),
         colorScheme: ColorScheme.fromSwatch(
             accentColor: data[ThemeColors.AccentColor]!.style,
             backgroundColor: data[ThemeColors.BackgroundColor]!.style,
         ),
         dividerColor: data[ThemeColors.DividerColor]!.style,
-        backgroundColor: data[ThemeColors.BackgroundColor]!.style,
         primaryColor: data[ThemeColors.PrimaryColor]!.style);
   }
 

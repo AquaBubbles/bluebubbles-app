@@ -1,22 +1,22 @@
 class ThemeColors {
-  static const String Headline1 = "Headline1";
-  static const String Headline2 = "Headline2";
-  static const String Bodytext1 = "Bodytext1";
-  static const String Bodytext2 = "BodyText2";
-  static const String Subtitle1 = "Subtitle1";
-  static const String Subtitle2 = "Subtitle2";
+static const String DisplayLarge = "DisplayLarge";
+  static const String DisplayMedium = "DisplayMedium";
+  static const String BodyLarge = "BodyLarge";
+  static const String BodyMedium = "BodyMedium";
+  static const String TitleMedium = "TitleMedium";
+  static const String TitleSmall = "TitleSmall";
   static const String AccentColor = "AccentColor";
   static const String DividerColor = "DividerColor";
   static const String BackgroundColor = "BackgroundColor";
   static const String PrimaryColor = "PrimaryColor";
 
   static const List<String> Colors = [
-    Headline1,
-    Headline2,
-    Bodytext1,
-    Bodytext2,
-    Subtitle1,
-    Subtitle2,
+    DisplayLarge,
+    DisplayMedium,
+    BodyLarge,
+    BodyMedium,
+    TitleMedium,
+    TitleSmall,
     AccentColor,
     DividerColor,
     BackgroundColor,
