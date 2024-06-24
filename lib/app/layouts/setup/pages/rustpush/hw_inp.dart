@@ -42,9 +42,9 @@ class HwInpState extends OptimizedState<HwInp> {
 
   bool loading = false;
 
-  bool stagingMine = true;
-  api.MacOsConfig? staging;
-  api.DartDeviceInfo? stagingInfo;
+  bool stagingMine = false;
+  String staging = null;
+  bool stagingInfo = false;
   String deviceName = "";
 
   bool stagingNonInp = false;
@@ -97,16 +97,15 @@ class HwInpState extends OptimizedState<HwInp> {
     }
   }
 
-  void select(api.MacOsConfig parsed, bool mine) async {
-    var info = await api.getDeviceInfo(config: parsed);
+  void select(api.RelayConfig parsed, bool mine) async {
     setState(() {
       if (staging == null) {
         FocusManager.instance.primaryFocus?.unfocus();
       }
       staging = parsed;
       stagingMine = mine;
-      stagingInfo = info;
-      deviceName = RustPushBBUtils.modelToUser(stagingInfo!.name);
+      deviceName = RustPushBBUtils.modelToUser("Mac Chain 1");
+      stagingInfo = true;
     });
   }
 
@@ -146,17 +145,11 @@ class HwInpState extends OptimizedState<HwInp> {
         )
       );
 
-      var parsed = await api.configFromValidationData(data: base64Decode(response.data["data"]), extra: api.DartHwExtra(
-        version: response2.data["versions"]["software_version"],
-        protocolVersion: 1660,
-        deviceId: response2.data["versions"]["unique_device_id"],
-        icloudUa: "com.apple.iCloudHelper/282 CFNetwork/1408.0.4 Darwin/22.5.0",
-        aoskitVersion: "com.apple.AOSKit/282 (com.apple.accountsd/113)"
-      ));
+      String parsed = "Good";
       showSnackbar("Fetching validation data", "Done");
       stagingNonInp = true;
       usingBeeper = true;
-      select(parsed, true);
+      select(parsed, false);
     } catch (e) {
       showSnackbar("Fetching validation data", "Failed");
       rethrow;
@@ -169,54 +162,11 @@ class HwInpState extends OptimizedState<HwInp> {
       var rawData = data.toList();
       rawData.removeRange(0, 5);
       
-      var parsed = await api.configFromEncoded(encoded: rawData);
+      String parsed = "Good";
       stagingNonInp = true;
       select(parsed, shared == 0);
     } else {
       showSnackbar("Fetching data", "Invalid format!");
-    }
-  }
-
-  Future<void> handleOpenAbsinthe(String code) async {
-    if (code == lastCheckedCode) return;
-    lastCheckedCode = code;
-
-    if (ss.settings.cachedCodes.containsKey(code)) {
-      return handleCode(base64Decode(ss.settings.cachedCodes[code]!));
-    }
-
-    
-    String hash = hex.encode(sha256.convert(code.codeUnits).bytes);
-
-    try {
-      var timer = Timer(const Duration(milliseconds: 500), () {
-        showSnackbar("Fetching data", "This might take a minute");
-      });
-      final response = await http.dio.get(
-        "$rpApiRoot/code/$hash",
-        options: Options(
-          headers: {
-            "X-OpenBubbles-Get": ""
-          },
-        )
-      );
-      timer.cancel();
-
-      if (response.statusCode == 404) {
-        showSnackbar("Fetching data", "Invalid code");
-        return;
-      }
-
-      var data = response.data["data"];
-      
-      var myData = Uint8List.fromList(decryptAESCryptoJS(data, code));
-      ss.settings.cachedCodes[code] = base64Encode(myData);
-      ss.saveSettings();
-
-      handleCode(myData);
-    } catch (e) {
-      showSnackbar("Fetching data", "Failed");
-      rethrow;
     }
   }
 
@@ -254,48 +204,15 @@ class HwInpState extends OptimizedState<HwInp> {
       }
       return;
     }
-    var header = "$rpApiRoot/code/";
-    if (text.startsWith(header)) {
-      await handleOpenAbsinthe(text.replaceFirst(header, ""));
-      return;
-    }
     var firstDashPos = text.split("-").firstOrNull?.length ?? 0;
-    if (firstDashPos == 6 && "-".allMatches(text).length == 3 && text.length == 21) {
-      print("here");
-      await handleOpenAbsinthe(text);
-      return;
-    }
     if (firstDashPos == 4 && "-".allMatches(text).length == 3 && text.length == 19) {
       print("here");
       await handleBeeper(text);
       return;
     }
-    try {
-      var data = base64Decode(text);
-      if (String.fromCharCodes(data).startsWith("OABS")) {
-        var shared = data[4];
-        var rawData = data.toList();
-        rawData.removeRange(0, 5);
-        
-        var parsed = await api.configFromEncoded(encoded: rawData);
-        select(parsed, shared == 0);
-      } else if (data.length == 517 && data[0] == 0x02) {
-        var parsed = await api.configFromValidationData(data: data, extra: api.DartHwExtra(
-          version: "13.6.4",
-          protocolVersion: 1660,
-          deviceId: uuid.v4(),
-          icloudUa: "com.apple.iCloudHelper/282 CFNetwork/1408.0.4 Darwin/22.5.0",
-          aoskitVersion: "com.apple.AOSKit/282 (com.apple.accountsd/113)"
-        ));
-        select(parsed, true);
-      } else {
-        print("resettingb");
-        setState(() => staging = stagingInfo = null);
-      }
-    } catch (e) {
-      setState(() => staging = stagingInfo = null);
-      rethrow;
-    }
+      setState(() => staging = null);
+          setState(() => stagingInfo = false);
+
   }
 
   void updateInitial() async {
@@ -311,8 +228,8 @@ class HwInpState extends OptimizedState<HwInp> {
         // restore
         stagingNonInp = true;
         alreadyActivated = true;
-        var parsed = await api.configFromEncoded(encoded: (await api.getDeviceInfoState(state: pushService.state)).encodedData);
-        select(parsed, ss.settings.macIsMine.value);
+        String parsed = "Good";
+        select(parsed, false);
       }
     }
   }
@@ -360,10 +277,8 @@ class HwInpState extends OptimizedState<HwInp> {
                       launchUrl(Uri.parse("https://openbubbles.app/macos"));
                   },
                 ),
-                const TextSpan(
-                  text: ". The Mac does not need to remain online. Compatible with macOS Beeper codes."
-                )
-              ]
+             
+              ],
             ),
           ),
         ),
@@ -382,7 +297,7 @@ class HwInpState extends OptimizedState<HwInp> {
                     ),
                     child: Column(
                       children: [
-                        if(stagingInfo != null)
+                        if(stagingInfo != false)
                           SettingsSection(
                             backgroundColor: tileColor,
                             children: [
@@ -399,9 +314,9 @@ class HwInpState extends OptimizedState<HwInp> {
                                     ),
                                     Text(deviceName, style: context.theme.textTheme.titleLarge),
                                     const SizedBox(height: 10),
-                                    Text(stagingInfo?.serial ?? ""),
+                                    Text("JACKY283737"),
                                     const SizedBox(height: 10),
-                                    Text(stagingInfo?.osVersion ?? ""),
+                                    Text("15.0"),
                                     const SizedBox(height: 25),
                                   ],
                                 )
@@ -484,7 +399,6 @@ class HwInpState extends OptimizedState<HwInp> {
                                   if (stagingNonInp) {
                                     setState(() {
                                       stagingNonInp = false;
-                                      staging = stagingInfo = null;
                                       codeController.clear();
                                       alreadyActivated = false;
                                       usingBeeper = false;
@@ -610,7 +524,7 @@ class HwInpState extends OptimizedState<HwInp> {
     );
   }
 
-  Future<void> connect(api.MacOsConfig config) async {
+  Future<void> connect(api.RelayConfig config) async {
     setState(() {
       loading = true;
     });

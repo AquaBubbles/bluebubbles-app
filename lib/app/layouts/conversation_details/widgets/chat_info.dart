@@ -482,61 +482,7 @@ class _ChatInfoState extends OptimizedState<ChatInfo> {
                               ),
                             ),
                           )),
-                          if (ss.settings.macIsMine.value && chat.isRpSms)
-                          const SizedBox(width: 5),
-                          if (ss.settings.macIsMine.value && chat.isRpSms)
-                          Expanded(
-                            child: Material(
-                              borderRadius: BorderRadius.circular(15),
-                              color: tileColor,
-                              child: InkWell(
-                                onTap: () {
-                                  var ctx = context;
-                                  showDialog(
-                                    context: Get.context!,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text('Choose your friends wisely'),
-                                      content: Text(
-                                        "Apple may block devices due to spam or exceeding 20 users.",
-                                        style: Get.textTheme.bodyLarge,
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                                onPressed: () => Get.back(),
-                                                child: Text("Cancel", style: context.theme.textTheme.bodyLarge!.copyWith(color: context.theme.colorScheme.primary))),
-                                        TextButton(
-                                                onPressed: () async {
-                                                    Get.back();
-                                                    String code = await pushService.uploadCode(false, await api.getDeviceInfoState(state: pushService.state));
-                                                    String text = "$rpApiRoot/code/$code";
-                                                    cvc(chat).textController.text = text;
-                                                    Navigator.of(ctx).pop();
-                                                },
-                                                child: Text("Invite", style: context.theme.textTheme.bodyLarge!.copyWith(color: context.theme.colorScheme.primary))),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(15),
-                                child: SizedBox(
-                                  height: 60,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.arrow_up_right_diamond,
-                                        color: context.theme.colorScheme.onSurface,
-                                        size: 20
-                                      ),
-                                      const SizedBox(height: 7.5),
-                                      Text("Invite", style: context.theme.textTheme.bodySmall!.copyWith(color: context.theme.colorScheme.onSurface)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                
                         ],
                       )
                     ),

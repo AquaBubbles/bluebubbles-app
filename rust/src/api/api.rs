@@ -13,7 +13,6 @@ pub use rustpush::{IDSAppleUser, PushError, IDSUser, IMClient, IMessage, Convers
 use serde::{Serialize, Deserialize};
 use tokio::{runtime::Runtime, select, sync::{broadcast, oneshot::{self, Sender}, Mutex, RwLock}};
 use rustpush::{init_logger, APSConnection, APSState, Attachment, BalloonBody, MMCSFile, MessagePart, MessageParts, OSConfig, RegisterState};
-pub use rustpush::{MacOSConfig, HardwareConfig};
 use uniffi::{deps::log::{info, error}, HandleAlloc};
 use std::io::Seek;
 use async_recursion::async_recursion;
@@ -49,7 +48,7 @@ lazy_static! {
 #[derive(Serialize, Deserialize, Clone)]
 struct SavedHardwareState {
     push: APSState,
-    os_config: MacOSConfig,
+    os_config: RelayConfig,
 }
 
 pub enum RegistrationPhase {
@@ -64,7 +63,7 @@ pub struct InnerPushState {
     pub users: Vec<IDSUser>,
     pub client: Option<IMClient>,
     pub conf_dir: PathBuf,
-    pub os_config: Option<Arc<MacOSConfig>>,
+    pub os_config: Option<Arc<RelayConfig>>,
     pub account: Option<AppleAccount>,
     pub cancel_poll: Mutex<Option<Sender<()>>>
 }
@@ -192,7 +191,7 @@ pub async fn register_ids(state: &Arc<PushState>) -> anyhow::Result<Option<DartS
     Ok(None)
 }
 
-async fn setup_push(config: Arc<MacOSConfig>, state: Option<&APSState>, state_path: PathBuf) -> (Arc<APSConnection>, Option<PushError>) {
+async fn setup_push(config: Arc<RelayConfig>, state: Option<&APSState>, state_path: PathBuf) -> (Arc<APSConnection>, Option<PushError>) {
     let (conn, error) = APSConnection::new(config.clone(), state.cloned()).await;
 
     if error.is_none() {
@@ -236,7 +235,7 @@ pub async fn configure_app_review(state: &Arc<PushState>) -> anyhow::Result<()> 
     Ok(())
 }
 
-pub async fn configure_macos(state: &Arc<PushState>, config: &MacOSConfig) -> anyhow::Result<()> {
+pub async fn configure_macos(state: &Arc<PushState>, config: &RelayConfig) -> anyhow::Result<()> {
     let config = config.clone();
     let mut inner = state.0.write().await;
     inner.os_config = Some(Arc::new(config));
@@ -249,25 +248,7 @@ pub async fn configure_macos(state: &Arc<PushState>, config: &MacOSConfig) -> an
     Ok(())
 }
 
-pub struct DartHwExtra {
-    pub version: String,
-    pub protocol_version: u32,
-    pub device_id: String,
-    pub icloud_ua: String,
-    pub aoskit_version: String,
-}
 
-pub fn config_from_validation_data(data: Vec<u8>, extra: DartHwExtra) -> anyhow::Result<MacOSConfig> {
-    let inner = HardwareConfig::from_validation_data(&data)?;
-    Ok(MacOSConfig {
-        inner,
-        version: extra.version,
-        protocol_version: extra.protocol_version,
-        device_id: extra.device_id,
-        icloud_ua: extra.icloud_ua,
-        aoskit_version: extra.aoskit_version,
-    })
-}
 
 pub struct DartDeviceInfo {
     pub name: String,
@@ -281,7 +262,7 @@ pub async fn get_device_info_state(state: &Arc<PushState>) -> anyhow::Result<Dar
     get_device_info(locked.os_config.as_ref().unwrap())
 }
 
-pub fn get_device_info(config: &MacOSConfig) -> anyhow::Result<DartDeviceInfo> {
+/*pub fn get_device_info(config: &MacOSConfig) -> anyhow::Result<DartDeviceInfo> {
     let copied = config.clone();
     Ok(DartDeviceInfo {
         name: config.inner.product_name.clone(),
@@ -311,9 +292,9 @@ pub fn get_device_info(config: &MacOSConfig) -> anyhow::Result<DartDeviceInfo> {
             aoskit_version: copied.aoskit_version,
         }.encode_to_vec()
     })
-}
+}*/
 
-pub fn config_from_encoded(encoded: Vec<u8>) -> anyhow::Result<MacOSConfig> {
+/*pub fn config_from_encoded(encoded: Vec<u8>) -> anyhow::Result<MacOSConfig> {
     let copied = crate::bbhwinfo::HwInfo::decode(&mut Cursor::new(encoded))?;
     let inner = copied.inner.unwrap();
     Ok(MacOSConfig {
@@ -340,7 +321,7 @@ pub fn config_from_encoded(encoded: Vec<u8>) -> anyhow::Result<MacOSConfig> {
         aoskit_version: copied.aoskit_version,
     })
 }
-
+*/
 
 pub fn ptr_to_dart(ptr: String) -> DartIMessage {
     let pointer: u64 = ptr.parse().unwrap();
