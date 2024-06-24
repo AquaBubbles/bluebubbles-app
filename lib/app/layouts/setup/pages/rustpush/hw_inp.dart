@@ -43,7 +43,7 @@ class HwInpState extends OptimizedState<HwInp> {
   bool loading = false;
 
   bool stagingMine = false;
-  String staging = null;
+  String staging = "";
   bool stagingInfo = false;
   String deviceName = "";
 
@@ -99,10 +99,10 @@ class HwInpState extends OptimizedState<HwInp> {
 
   void select(api.RelayConfig parsed, bool mine) async {
     setState(() {
-      if (staging == null) {
+      if (staging == "") {
         FocusManager.instance.primaryFocus?.unfocus();
       }
-      staging = parsed;
+      staging = "Good";
       stagingMine = mine;
       deviceName = RustPushBBUtils.modelToUser("Mac Chain 1");
       stagingInfo = true;
@@ -210,7 +210,7 @@ class HwInpState extends OptimizedState<HwInp> {
       await handleBeeper(text);
       return;
     }
-      setState(() => staging = null);
+      setState(() => staging = "");
           setState(() => stagingInfo = false);
 
   }
@@ -254,8 +254,8 @@ class HwInpState extends OptimizedState<HwInp> {
   @override
   Widget build(BuildContext context) {
     return SetupPageTemplate(
-      title: staging == null ? "Hardware info" : stagingMine ? "My Mac" : "Shared Mac",
-      customSubtitle: staging != null ? Container() : Padding(
+      title: staging == "" ? "Hardware info" : stagingMine ? "My Mac" : "Shared Mac",
+      customSubtitle: staging != "" ? Container() : Padding(
         padding: const EdgeInsets.all(8.0),
         child: Align(
           alignment: Alignment.centerLeft,
@@ -419,7 +419,7 @@ class HwInpState extends OptimizedState<HwInp> {
                                 ),
                               ),
                             ),
-                            if (staging == null && !kIsDesktop && !loading)
+                            if (staging == "" && !kIsDesktop && !loading)
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
@@ -457,13 +457,13 @@ class HwInpState extends OptimizedState<HwInp> {
                                 ),
                               ),
                             ),
-                            if (staging != null || kIsDesktop || loading)
+                            if (staging != "" || kIsDesktop || loading)
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
                                 gradient: LinearGradient(
                                   begin: AlignmentDirectional.topStart,
-                                  colors: loading || (kIsDesktop && staging == null) ? [HexColor('777777'), HexColor('777777')] : [HexColor('2772C3'), HexColor('5CA7F8').darkenPercent(5)],
+                                  colors: loading || (kIsDesktop && staging == "") ? [HexColor('777777'), HexColor('777777')] : [HexColor('2772C3'), HexColor('5CA7F8').darkenPercent(5)],
                                 ),
                               ),
                               height: 40,
@@ -479,7 +479,7 @@ class HwInpState extends OptimizedState<HwInp> {
                                   maximumSize: MaterialStateProperty.all(const Size(200, 36)),
                                   minimumSize: MaterialStateProperty.all(const Size(30, 30)),
                                 ),
-                                onPressed: loading || (kIsDesktop && staging == null) ? null : () async {
+                                onPressed: loading || (kIsDesktop && staging == "") ? null : () async {
                                   ss.settings.customHeaders.value = {};
                                   http.onInit();
                                   connect(staging!);
@@ -490,7 +490,7 @@ class HwInpState extends OptimizedState<HwInp> {
                                     Opacity(opacity: loading ? 0 : 1, child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(kIsDesktop && staging == null ? "Continue" : "Use this Mac",
+                                        Text(kIsDesktop && staging == "" ? "Continue" : "Use this Mac",
                                             style: context.theme.textTheme.bodyLarge!
                                                 .apply(fontSizeFactor: 1.1, color: Colors.white)),
                                         const SizedBox(width: 10),
