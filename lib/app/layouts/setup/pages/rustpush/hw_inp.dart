@@ -524,7 +524,7 @@ class HwInpState extends OptimizedState<HwInp> {
     );
   }
 
-  Future<void> connect(api.RelayConfig config) async {
+  Future<void> connect(String config) async {
     setState(() {
       loading = true;
     });
