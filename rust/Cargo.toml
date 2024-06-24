@@ -8,14 +8,14 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 flutter_rust_bridge = "=2.0.0-dev.33"
-rustpush = { path = "/home/tae/Documents/GitHub/rustpush" }
+rustpush = { path = "/home/maxmiai91/aqua/rustpush" }
 plist = "1.5.0"
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 anyhow = "1.0.75"
 uniffi = { git = "https://github.com/mozilla/uniffi-rs", features = [ "cli", "tokio" ] }
 async-recursion = "1.0.5"
-icloud_auth = { path = "/home/tae/Documents/GitHub/apple-private-apis/icloud-auth" }
+icloud_auth = { path = "/home/maxmiai91/aqua/apple-private-apis/icloud-auth" }
 prost = "0.12"
 # Only necessary if using Protobuf well-known types:
 prost-types = "0.12"
