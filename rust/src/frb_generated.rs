@@ -32,7 +32,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0-dev.33";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 2081148752;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1153294413;
 
 // Section: executor
 
@@ -40,69 +40,6 @@ pub use crate::api::api::FLUTTER_RUST_BRIDGE_HANDLER;
 
 // Section: wire_funcs
 
-fn wire_config_from_encoded_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "config_from_encoded",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_encoded = <Vec<u8>>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse((move || crate::api::api::config_from_encoded(api_encoded))())
-            }
-        },
-    )
-}
-fn wire_config_from_validation_data_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "config_from_validation_data",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_data = <Vec<u8>>::sse_decode(&mut deserializer);
-            let api_extra = <crate::api::api::DartHwExtra>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse((move || {
-                    crate::api::api::config_from_validation_data(api_data, api_extra)
-                })())
-            }
-        },
-    )
-}
 fn wire_configure_app_review_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -137,7 +74,7 @@ fn wire_configure_macos_impl(
             let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
             let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_state = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Arc < PushState >>>>::sse_decode(&mut deserializer);
-let api_config = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>>::sse_decode(&mut deserializer);deserializer.end(); move |context| async move {
+let api_config = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>>::sse_decode(&mut deserializer);deserializer.end(); move |context| async move {
                     transform_result_sse((move || async move {
                         let mut api_state_decoded = None;
 let mut api_config_decoded = None;
@@ -410,55 +347,6 @@ let decode_indices_ = flutter_rust_bridge::for_generated::rust_auto_opaque_decod
  crate::api::api::get_2fa_sms_opts(&api_state).await
                     })().await)
                 } })
-}
-fn wire_get_device_info_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "get_device_info",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_config = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>,
-            >>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse((move || {
-                    let mut api_config_decoded = None;
-                    let decode_indices_ =
-                        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_compute_order(
-                            vec![api_config.rust_auto_opaque_lock_order_info(0, false)],
-                        );
-                    for i in decode_indices_ {
-                        match i {
-                            0 => {
-                                api_config_decoded =
-                                    Some(api_config.rust_auto_opaque_decode_sync_ref())
-                            }
-                            _ => unreachable!(),
-                        }
-                    }
-                    let api_config = api_config_decoded.unwrap();
-                    crate::api::api::get_device_info(&api_config)
-                })())
-            }
-        },
-    )
 }
 fn wire_get_device_info_state_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
@@ -1071,7 +959,7 @@ flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Arc<PushState>>
 );
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
-    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>
 );
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Value>
@@ -1094,16 +982,6 @@ impl SseDecode for Arc<PushState> {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <RustOpaqueMoi<
             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Arc<PushState>>,
-        >>::sse_decode(deserializer);
-        return inner.rust_auto_opaque_decode_owned();
-    }
-}
-
-impl SseDecode for MacOSConfig {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>,
         >>::sse_decode(deserializer);
         return inner.rust_auto_opaque_decode_owned();
     }
@@ -1140,7 +1018,7 @@ impl SseDecode
 }
 
 impl SseDecode
-    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1309,24 +1187,6 @@ impl SseDecode for crate::api::api::DartEditMessage {
             tuuid: var_tuuid,
             edit_part: var_editPart,
             new_parts: var_newParts,
-        };
-    }
-}
-
-impl SseDecode for crate::api::api::DartHwExtra {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_version = <String>::sse_decode(deserializer);
-        let mut var_protocolVersion = <u32>::sse_decode(deserializer);
-        let mut var_deviceId = <String>::sse_decode(deserializer);
-        let mut var_icloudUa = <String>::sse_decode(deserializer);
-        let mut var_aoskitVersion = <String>::sse_decode(deserializer);
-        return crate::api::api::DartHwExtra {
-            version: var_version,
-            protocol_version: var_protocolVersion,
-            device_id: var_deviceId,
-            icloud_ua: var_icloudUa,
-            aoskit_version: var_aoskitVersion,
         };
     }
 }
@@ -2220,43 +2080,40 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        9 => wire_config_from_encoded_impl(port, ptr, rust_vec_len, data_len),
-        6 => wire_config_from_validation_data_impl(port, ptr, rust_vec_len, data_len),
         4 => wire_configure_app_review_impl(port, ptr, rust_vec_len, data_len),
         5 => wire_configure_macos_impl(port, ptr, rust_vec_len, data_len),
-        32 => wire_convert_token_to_uuid_impl(port, ptr, rust_vec_len, data_len),
-        36 => wire_dart_attachment_get_size_impl(port, ptr, rust_vec_len, data_len),
-        35 => wire_dart_attachment_restore_impl(port, ptr, rust_vec_len, data_len),
-        34 => wire_dart_attachment_save_impl(port, ptr, rust_vec_len, data_len),
-        37 => wire_dart_message_parts_as_plain_impl(port, ptr, rust_vec_len, data_len),
-        14 => wire_do_reregister_impl(port, ptr, rust_vec_len, data_len),
-        18 => wire_download_attachment_impl(port, ptr, rust_vec_len, data_len),
-        19 => wire_download_mmcs_impl(port, ptr, rust_vec_len, data_len),
-        25 => wire_get_2fa_sms_opts_impl(port, ptr, rust_vec_len, data_len),
-        8 => wire_get_device_info_impl(port, ptr, rust_vec_len, data_len),
-        7 => wire_get_device_info_state_impl(port, ptr, rust_vec_len, data_len),
-        13 => wire_get_handles_impl(port, ptr, rust_vec_len, data_len),
-        17 => wire_get_phase_impl(port, ptr, rust_vec_len, data_len),
-        31 => wire_get_regstate_impl(port, ptr, rust_vec_len, data_len),
-        33 => wire_get_sms_targets_impl(port, ptr, rust_vec_len, data_len),
-        30 => wire_get_user_name_impl(port, ptr, rust_vec_len, data_len),
-        29 => wire_invalidate_id_cache_impl(port, ptr, rust_vec_len, data_len),
-        15 => wire_new_msg_impl(port, ptr, rust_vec_len, data_len),
+        29 => wire_convert_token_to_uuid_impl(port, ptr, rust_vec_len, data_len),
+        33 => wire_dart_attachment_get_size_impl(port, ptr, rust_vec_len, data_len),
+        32 => wire_dart_attachment_restore_impl(port, ptr, rust_vec_len, data_len),
+        31 => wire_dart_attachment_save_impl(port, ptr, rust_vec_len, data_len),
+        34 => wire_dart_message_parts_as_plain_impl(port, ptr, rust_vec_len, data_len),
+        11 => wire_do_reregister_impl(port, ptr, rust_vec_len, data_len),
+        15 => wire_download_attachment_impl(port, ptr, rust_vec_len, data_len),
+        16 => wire_download_mmcs_impl(port, ptr, rust_vec_len, data_len),
+        22 => wire_get_2fa_sms_opts_impl(port, ptr, rust_vec_len, data_len),
+        6 => wire_get_device_info_state_impl(port, ptr, rust_vec_len, data_len),
+        10 => wire_get_handles_impl(port, ptr, rust_vec_len, data_len),
+        14 => wire_get_phase_impl(port, ptr, rust_vec_len, data_len),
+        28 => wire_get_regstate_impl(port, ptr, rust_vec_len, data_len),
+        30 => wire_get_sms_targets_impl(port, ptr, rust_vec_len, data_len),
+        27 => wire_get_user_name_impl(port, ptr, rust_vec_len, data_len),
+        26 => wire_invalidate_id_cache_impl(port, ptr, rust_vec_len, data_len),
+        12 => wire_new_msg_impl(port, ptr, rust_vec_len, data_len),
         1 => wire_new_push_state_impl(port, ptr, rust_vec_len, data_len),
-        10 => wire_ptr_to_dart_impl(port, ptr, rust_vec_len, data_len),
-        11 => wire_recv_wait_impl(port, ptr, rust_vec_len, data_len),
+        7 => wire_ptr_to_dart_impl(port, ptr, rust_vec_len, data_len),
+        8 => wire_recv_wait_impl(port, ptr, rust_vec_len, data_len),
         3 => wire_register_ids_impl(port, ptr, rust_vec_len, data_len),
-        28 => wire_reset_state_impl(port, ptr, rust_vec_len, data_len),
-        12 => wire_send_impl(port, ptr, rust_vec_len, data_len),
-        26 => wire_send_2fa_sms_impl(port, ptr, rust_vec_len, data_len),
-        23 => wire_send_2fa_to_devices_impl(port, ptr, rust_vec_len, data_len),
+        25 => wire_reset_state_impl(port, ptr, rust_vec_len, data_len),
+        9 => wire_send_impl(port, ptr, rust_vec_len, data_len),
+        23 => wire_send_2fa_sms_impl(port, ptr, rust_vec_len, data_len),
+        20 => wire_send_2fa_to_devices_impl(port, ptr, rust_vec_len, data_len),
         2 => wire_service_from_ptr_impl(port, ptr, rust_vec_len, data_len),
-        22 => wire_try_auth_impl(port, ptr, rust_vec_len, data_len),
-        21 => wire_upload_attachment_impl(port, ptr, rust_vec_len, data_len),
-        20 => wire_upload_mmcs_impl(port, ptr, rust_vec_len, data_len),
-        16 => wire_validate_targets_impl(port, ptr, rust_vec_len, data_len),
-        24 => wire_verify_2fa_impl(port, ptr, rust_vec_len, data_len),
-        27 => wire_verify_2fa_sms_impl(port, ptr, rust_vec_len, data_len),
+        19 => wire_try_auth_impl(port, ptr, rust_vec_len, data_len),
+        18 => wire_upload_attachment_impl(port, ptr, rust_vec_len, data_len),
+        17 => wire_upload_mmcs_impl(port, ptr, rust_vec_len, data_len),
+        13 => wire_validate_targets_impl(port, ptr, rust_vec_len, data_len),
+        21 => wire_verify_2fa_impl(port, ptr, rust_vec_len, data_len),
+        24 => wire_verify_2fa_sms_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -2286,21 +2143,6 @@ impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<
 
 impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<Arc<PushState>>> for Arc<PushState> {
     fn into_into_dart(self) -> FrbWrapper<Arc<PushState>> {
-        self.into()
-    }
-}
-
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for FrbWrapper<MacOSConfig> {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
-            .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<MacOSConfig> {}
-
-impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<MacOSConfig>> for MacOSConfig {
-    fn into_into_dart(self) -> FrbWrapper<MacOSConfig> {
         self.into()
     }
 }
@@ -2490,27 +2332,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::api::DartEditMessage>
     for crate::api::api::DartEditMessage
 {
     fn into_into_dart(self) -> crate::api::api::DartEditMessage {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::api::DartHwExtra {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.version.into_into_dart().into_dart(),
-            self.protocol_version.into_into_dart().into_dart(),
-            self.device_id.into_into_dart().into_dart(),
-            self.icloud_ua.into_into_dart().into_dart(),
-            self.aoskit_version.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::api::DartHwExtra {}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::api::DartHwExtra>
-    for crate::api::api::DartHwExtra
-{
-    fn into_into_dart(self) -> crate::api::api::DartHwExtra {
         self
     }
 }
@@ -3208,13 +3029,6 @@ impl SseEncode for Arc<PushState> {
     }
 }
 
-impl SseEncode for MacOSConfig {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
-    }
-}
-
 impl SseEncode for Value {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3244,7 +3058,7 @@ impl SseEncode
 }
 
 impl SseEncode
-    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3378,17 +3192,6 @@ impl SseEncode for crate::api::api::DartEditMessage {
         <String>::sse_encode(self.tuuid, serializer);
         <u64>::sse_encode(self.edit_part, serializer);
         <crate::api::api::DartMessageParts>::sse_encode(self.new_parts, serializer);
-    }
-}
-
-impl SseEncode for crate::api::api::DartHwExtra {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.version, serializer);
-        <u32>::sse_encode(self.protocol_version, serializer);
-        <String>::sse_encode(self.device_id, serializer);
-        <String>::sse_encode(self.icloud_ua, serializer);
-        <String>::sse_encode(self.aoskit_version, serializer);
     }
 }
 

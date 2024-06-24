@@ -28,17 +28,17 @@ pub extern "C" fn frbgen_bluebubbles_rust_arc_decrement_strong_count_RustOpaque_
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_bluebubbles_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+pub extern "C" fn frbgen_bluebubbles_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
     ptr: *const std::ffi::c_void,
 ) {
-    MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>::increment_strong_count(ptr as _);
+    MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>::increment_strong_count(ptr as _);
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_bluebubbles_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+pub extern "C" fn frbgen_bluebubbles_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
     ptr: *const std::ffi::c_void,
 ) {
-    MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>::decrement_strong_count(ptr as _);
+    MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>::decrement_strong_count(ptr as _);
 }
 
 #[no_mangle]

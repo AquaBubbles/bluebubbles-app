@@ -28,27 +28,14 @@ Future<void> configureAppReview({required ArcPushState state, dynamic hint}) =>
 
 Future<void> configureMacos(
         {required ArcPushState state,
-        required MacOsConfig config,
+        required RelayConfig config,
         dynamic hint}) =>
     RustLib.instance.api
         .configureMacos(state: state, config: config, hint: hint);
 
-Future<MacOsConfig> configFromValidationData(
-        {required List<int> data, required DartHwExtra extra, dynamic hint}) =>
-    RustLib.instance.api
-        .configFromValidationData(data: data, extra: extra, hint: hint);
-
 Future<DartDeviceInfo> getDeviceInfoState(
         {required ArcPushState state, dynamic hint}) =>
     RustLib.instance.api.getDeviceInfoState(state: state, hint: hint);
-
-Future<DartDeviceInfo> getDeviceInfo(
-        {required MacOsConfig config, dynamic hint}) =>
-    RustLib.instance.api.getDeviceInfo(config: config, hint: hint);
-
-Future<MacOsConfig> configFromEncoded(
-        {required List<int> encoded, dynamic hint}) =>
-    RustLib.instance.api.configFromEncoded(encoded: encoded, hint: hint);
 
 Future<DartIMessage> ptrToDart({required String ptr, dynamic hint}) =>
     RustLib.instance.api.ptrToDart(ptr: ptr, hint: hint);
@@ -204,22 +191,22 @@ class ArcPushState extends RustOpaque {
   );
 }
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MacOSConfig>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RelayConfig>>
 @sealed
-class MacOsConfig extends RustOpaque {
-  MacOsConfig.dcoDecode(List<dynamic> wire)
+class RelayConfig extends RustOpaque {
+  RelayConfig.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  MacOsConfig.sseDecode(int ptr, int externalSizeOnNative)
+  RelayConfig.sseDecode(int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
     rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_MacOsConfig,
+        RustLib.instance.api.rust_arc_increment_strong_count_RelayConfig,
     rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_MacOsConfig,
+        RustLib.instance.api.rust_arc_decrement_strong_count_RelayConfig,
     rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_MacOsConfigPtr,
+        RustLib.instance.api.rust_arc_decrement_strong_count_RelayConfigPtr,
   );
 }
 
@@ -441,41 +428,6 @@ class DartEditMessage {
           tuuid == other.tuuid &&
           editPart == other.editPart &&
           newParts == other.newParts;
-}
-
-class DartHwExtra {
-  final String version;
-  final int protocolVersion;
-  final String deviceId;
-  final String icloudUa;
-  final String aoskitVersion;
-
-  const DartHwExtra({
-    required this.version,
-    required this.protocolVersion,
-    required this.deviceId,
-    required this.icloudUa,
-    required this.aoskitVersion,
-  });
-
-  @override
-  int get hashCode =>
-      version.hashCode ^
-      protocolVersion.hashCode ^
-      deviceId.hashCode ^
-      icloudUa.hashCode ^
-      aoskitVersion.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is DartHwExtra &&
-          runtimeType == other.runtimeType &&
-          version == other.version &&
-          protocolVersion == other.protocolVersion &&
-          deviceId == other.deviceId &&
-          icloudUa == other.icloudUa &&
-          aoskitVersion == other.aoskitVersion;
 }
 
 class DartIMessage {

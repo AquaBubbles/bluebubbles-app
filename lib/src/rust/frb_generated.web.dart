@@ -22,8 +22,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcPushState;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_MacOsConfigPtr => wire
-          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig;
+      get rust_arc_decrement_strong_count_RelayConfigPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ValuePtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue;
@@ -37,11 +37,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   ArcPushState
       dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcPushState(
-          dynamic raw);
-
-  @protected
-  MacOsConfig
-      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
           dynamic raw);
 
   @protected
@@ -60,8 +55,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           dynamic raw);
 
   @protected
-  MacOsConfig
-      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  RelayConfig
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic raw);
 
   @protected
@@ -75,8 +70,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           dynamic raw);
 
   @protected
-  MacOsConfig
-      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  RelayConfig
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic raw);
 
   @protected
@@ -122,9 +117,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DartEditMessage dco_decode_box_autoadd_dart_edit_message(dynamic raw);
-
-  @protected
-  DartHwExtra dco_decode_box_autoadd_dart_hw_extra(dynamic raw);
 
   @protected
   DartIMessage dco_decode_box_autoadd_dart_i_message(dynamic raw);
@@ -197,9 +189,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DartEditMessage dco_decode_dart_edit_message(dynamic raw);
-
-  @protected
-  DartHwExtra dco_decode_dart_hw_extra(dynamic raw);
 
   @protected
   DartIMessage dco_decode_dart_i_message(dynamic raw);
@@ -392,11 +381,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           SseDeserializer deserializer);
 
   @protected
-  MacOsConfig
-      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
-          SseDeserializer deserializer);
-
-  @protected
   Value
       sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue(
           SseDeserializer deserializer);
@@ -412,8 +396,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           SseDeserializer deserializer);
 
   @protected
-  MacOsConfig
-      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  RelayConfig
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           SseDeserializer deserializer);
 
   @protected
@@ -427,8 +411,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           SseDeserializer deserializer);
 
   @protected
-  MacOsConfig
-      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  RelayConfig
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           SseDeserializer deserializer);
 
   @protected
@@ -478,10 +462,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DartEditMessage sse_decode_box_autoadd_dart_edit_message(
-      SseDeserializer deserializer);
-
-  @protected
-  DartHwExtra sse_decode_box_autoadd_dart_hw_extra(
       SseDeserializer deserializer);
 
   @protected
@@ -569,9 +549,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DartEditMessage sse_decode_dart_edit_message(SseDeserializer deserializer);
-
-  @protected
-  DartHwExtra sse_decode_dart_hw_extra(SseDeserializer deserializer);
 
   @protected
   DartIMessage sse_decode_dart_i_message(SseDeserializer deserializer);
@@ -787,11 +764,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
-          MacOsConfig self, SseSerializer serializer);
-
-  @protected
-  void
       sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue(
           Value self, SseSerializer serializer);
 
@@ -807,8 +779,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
-          MacOsConfig self, SseSerializer serializer);
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
+          RelayConfig self, SseSerializer serializer);
 
   @protected
   void
@@ -822,8 +794,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
-          MacOsConfig self, SseSerializer serializer);
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
+          RelayConfig self, SseSerializer serializer);
 
   @protected
   void
@@ -871,10 +843,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_dart_edit_message(
       DartEditMessage self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_dart_hw_extra(
-      DartHwExtra self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_dart_i_message(
@@ -965,9 +933,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_dart_edit_message(
       DartEditMessage self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_dart_hw_extra(DartHwExtra self, SseSerializer serializer);
 
   @protected
   void sse_encode_dart_i_message(DartIMessage self, SseSerializer serializer);
@@ -1198,16 +1163,16 @@ class RustLibWire implements BaseWire {
           .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcPushState(
               ptr);
 
-  void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic ptr) =>
       wasmModule
-          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
               ptr);
 
-  void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+  void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic ptr) =>
       wasmModule
-          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
               ptr);
 
   void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValue(
@@ -1256,11 +1221,11 @@ class RustLibWasmModule implements WasmModule {
           dynamic ptr);
 
   external void
-      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic ptr);
 
   external void
-      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMacOSConfig(
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRelayConfig(
           dynamic ptr);
 
   external void
